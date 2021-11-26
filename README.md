@@ -58,37 +58,40 @@ Install RISC-V toolchains. You can do either of the following:
 Support Verilator (default) and Icarus Verilog.
 
 To run Icarus Verilog,
-    ```shell
-    # Ubuntu package needed to run the RTL simulation
-    sudo apt install iverilog
-    make verilator=0
-    ```
-Only running make without parameters will get help.
+```shell
+# Ubuntu package needed to run the RTL simulation
+sudo apt install iverilog
+make verilator=0
+```
 
-    $ make
-    make all         build all diags and run the RTL sim
-    make all-sw      build all diags and run the ISS sim
-    make tests-all   run all diags and compliance test
-    make coverage    generate code coverage report
-    make build       build all diags and the RTL
-    make dhrystone   build Dhrystone diag and run the RTL sim
-    make coremark    build Coremark diag and run the RTL sim
-    make clean       clean
-    make distclean   clean all
+Only running make without parameters will get help.
+```shell
+$ make
+make all         build all diags and run the RTL sim
+make all-sw      build all diags and run the ISS sim
+make tests-all   run all diags and compliance test
+make coverage    generate code coverage report
+make build       build all diags and the RTL
+make dhrystone   build Dhrystone diag and run the RTL sim
+make coremark    build Coremark diag and run the RTL sim
+make clean       clean
+make distclean   clean all
+```
 
 Supports following parameter when running the simulation.
-
-    +no-meminit do not memory initialize zero
-    +dump       dump VCD (Icarus Verilog) / FST (Verilator) file
-    +trace      generate tracelog
+* `+no-meminit` : do not memory initialize zero
+* `+dump` : dump VCD (Icarus Verilog) / FST (Verilator) file
+* `+trace` : generate tracelog
 
 For example, following command will generate the VCD dump.
+```shell
+cd sim && ./sim +dump
+```
 
-    cd sim && ./sim +dump
-
-Use +trace to generate a trace log, which can be compared with the log file of the ISS simulator to ensure that the RTL simulation is correct.
-
-    cd sim && ./sim +trace
+Use `+trace` to generate a trace log, which can be compared with the log file of the ISS simulator to ensure that the RTL simulation is correct.
+```shell
+cd sim && ./sim +trace
+```
 
 ## ISS (Instruction Set Simulator)
 
@@ -266,46 +269,53 @@ Provide the Yosys synthesis script on the `syn` directory.
 
 Compliance test for ISS simulator and RTL. This is the compliance test form RISC-V Foundation Compliance Task Group.
 The github repository is at <https://github.com/riscv/riscv-compliance>. Running the following command will clone the repository into `tests` directory and do the compliance test.
-
-    make tests              # run the compliance test for RTL
-    make tests-sw           # run the compliance test for ISS simulator
+```shell
+make tests              # run the compliance test for RTL
+make tests-sw           # run the compliance test for ISS simulator
+```
 
 Default is to run compliance test v1, run the following command to run compliance test v2.
-
-    make test_v=2 tests     # run the compliance test for RTL
-    make test_v=2 tests-sw  # run the compliance test for ISS simulator
+```shell
+make test_v=2 tests     # run the compliance test for RTL
+make test_v=2 tests-sw  # run the compliance test for ISS simulator
+```
 
 ## FreeRTOS support
 
 Reference code on <https://github.com/kuopinghsu/FreeRTOS-RISCV>.
-
-    # build FreeRTOS and demo
-    git clone --recursive https://github.com/kuopinghsu/FreeRTOS-RISCV
-    cd FreeRTOS-RISCV && make
+```shell
+# build FreeRTOS and demo
+git clone --recursive https://github.com/kuopinghsu/FreeRTOS-RISCV
+cd FreeRTOS-RISCV && make
+```
 
 This is an example to run the "queue" demo.
+```shell
+# make directory
+mkdir ${path_of_srv32}/sw/queue
 
-    # make directory
-    mkdir ${path_of_srv32}/sw/queue
+# copy queue.elf
+cp Demo/examples/queue.elf ${path_of_srv32}/sw/queue/.
 
-    # copy queue.elf
-    cp Demo/examples/queue.elf ${path_of_srv32}/sw/queue/.
+# update the example in sw directory
+cd ${path_of_srv32}/sw && make update
 
-    # update the example in sw directory
-    cd ${path_of_srv32}/sw && make update
-
-    # run the example for RTL and ISS simulator
-    cd ${path_of_srv32} && make queue
+# run the example for RTL and ISS simulator
+cd ${path_of_srv32} && make queue
+```
 
 ## Coverage Report
 
-    # Ubuntu package needed to generate coverage report
-    sudo apt install lcov
+```shell
+# Ubuntu package needed to generate coverage report
+sudo apt install lcov
+```
 
 Following command will generate the code coverage report in coverage/html
 directory.
-
-    % make coverage
+```shell
+make coverage
+```
 
 This is the coverage report of RTL by lcov, which get 100% code coverage.
 
