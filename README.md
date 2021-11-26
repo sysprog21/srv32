@@ -17,10 +17,16 @@ This is not a RISC-V core available for production.
 6.  <A Href="https://github.com/kuopinghsu/FreeRTOS-RISCV">FreeRTOS</A> support
 7.  ISS simulator
 
-## Building toolchains
+## Prerequisites
 
-Install RISCV toolchains.
+Install RISC-V toolchains. You can do either of the following:
 
+1. Use pre-built GNU Toolchain via <A href="https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/">xPack GNU RISC-V Embedded GCC</A>. Then, you can define an environment variable in advance:
+    ```shell
+    export CROSS_COMPILER=riscv-none-embed-
+    ```
+2. Build from source.
+    ```shell
     # Ubuntu packages needed:
     sudo apt-get install autoconf automake autotools-dev curl libmpc-dev \
         libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo \
@@ -28,16 +34,10 @@ Install RISCV toolchains.
     
     git clone --recursive https://github.com/riscv/riscv-gnu-toolchain
     cd riscv-gnu-toolchain
-    
-    mkdir build; cd build
+    mkdir -p build && cd build
     ../configure --prefix=/opt/riscv --enable-multilib
     make -j$(nproc)
-
-The default tools uses riscv64-unknown-elf-. If would like to use others toolchains, you can define a environment to override it. For example,
-
-    export CROSS_COMPILER=riscv-none-embed-
-
-Therefore, you can use <A href="https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/">xPack GNU RISC-V Embedded GCC</A> instead of building a toolchain yourself.
+    ```
 
 ## Files list
 

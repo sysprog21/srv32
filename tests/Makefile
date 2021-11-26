@@ -4,7 +4,7 @@ test_v     ?= 1
 rv32c      ?= 0
 
 ifndef CROSS_COMPILER
-export CROSS_COMPILER = riscv64-unknown-elf-
+export CROSS_COMPILER = riscv-none-embed-
 endif
 
 .PHONY: riscv-compliance

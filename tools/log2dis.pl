@@ -2,7 +2,7 @@
 use strict;
 
 my $VERBOSE = 1;
-my $CROSS_COMPILER = defined($ENV{'CROSS_COMPILER'}) ? $ENV{'CROSS_COMPILER'} : "riscv64-unknown-elf-";
+my $CROSS_COMPILER = defined($ENV{'CROSS_COMPILER'}) ? $ENV{'CROSS_COMPILER'} : "riscv-none-embed-";
 my $objdump = "${CROSS_COMPILER}objdump";
 my %DIS;
 $| = 1;

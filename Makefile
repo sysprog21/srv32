@@ -1,6 +1,6 @@
 
 ifndef CROSS_COMPILER
-export CROSS_COMPILER = riscv64-unknown-elf-
+export CROSS_COMPILER = riscv-none-embed-
 endif
 
 dirs        = $(dir $(wildcard sw/[^_]*/))

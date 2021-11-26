@@ -15,7 +15,7 @@ RUN_TARGET    = \
     $(TARGET_SWSIM) -l trace_sw.log $(TARGET_FLAGS) $< 2> $@; \
     diff --brief trace.log trace_sw.log && rm -f imem.bin dmem.bin memory.bin trace.log trace_sw.log dump.txt
 
-RISCV_PREFIX   ?= riscv64-unknown-elf-
+RISCV_PREFIX   ?= riscv-none-embed-
 RISCV_GCC      ?= $(RISCV_PREFIX)gcc
 RISCV_OBJDUMP  ?= $(RISCV_PREFIX)objdump
 RISCV_OBJCOPY  ?= $(RISCV_PREFIX)objcopy
