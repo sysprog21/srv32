@@ -37,7 +37,18 @@ BFLAGS      = -O3 -cc -Wall -Wno-STMTDLY -Wno-UNUSED \
               $(if $(_rv32c), +define+RV32C_ENABLED) \
               $(if $(_coverage), --coverage) \
               --trace-fst --Mdir sim_cc --build --exe sim_main.cpp getch.cpp
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+    UNAME_M := $(shell uname -m)
+    ifeq ($(UNAME_M),x86_64)
+        export VERILATOR_ROOT=$(CURDIR)/../verilator
+        TARGET_SIM  = $(VERILATOR_ROOT)/bin/verilator
+        SHELL_HACK := $(shell ln -sf $(TARGET_SIM)_bin-linux-x86_64 $(TARGET_SIM)_bin)
+    endif
+else
 TARGET_SIM  = verilator
+endif
+
 else
 BFLAGS      = $(if $(_top), -D SINGLE_RAM=1) $(if $(_rv32c), -DRV32C_ENABLED=1)
 endif
@@ -67,4 +78,4 @@ clean:
 	@$(RM) -rf sim_cc *_cov.dat
 
 distclean: clean
-
+	@$(RM) $(TARGET_SIM)_bin

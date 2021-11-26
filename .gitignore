@@ -34,6 +34,7 @@
 *.i*86
 *.x86_64
 *.hex
+verilator/bin/verilator_bin
 
 # Debug files
 *.dSYM/

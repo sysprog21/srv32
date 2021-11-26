@@ -57,26 +57,12 @@ Install RISC-V toolchains. You can do either of the following:
 
 Support Verilator (default) and Icarus Verilog.
 
-To run Verilator,
-
-    # Ubuntu package needed to run the RTL simulation
-    sudo apt install verilator
-    
-    # Modify the Makefile, and set verilator ?= 1
-    vim sim/Makefile
-    or
-    make verilator=1
-
 To run Icarus Verilog,
-
+    ```shell
     # Ubuntu package needed to run the RTL simulation
     sudo apt install iverilog
-    
-    # Modify the Makefile, and set verilator ?= 0
-    vim sim/Makefile
-    or
     make verilator=0
-
+    ```
 Only running make without parameters will get help.
 
     $ make
