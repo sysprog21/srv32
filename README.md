@@ -28,10 +28,9 @@ Install RISC-V toolchains. You can do either of the following:
 2. Build from source.
     ```shell
     # Ubuntu packages needed:
-    sudo apt-get install autoconf automake autotools-dev curl libmpc-dev \
-        libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo \
-        gperf libtool patchutils bc zlib1g-dev git libexpat1-dev
-    
+    sudo apt install autoconf automake autotools-dev curl gawk git \
+                     build-essential bison flex texinfo gperf libtool patchutils bc git \
+                     libmpc-dev libmpfr-dev libgmp-dev gawk zlib1g-dev libexpat1-dev
     git clone --recursive https://github.com/riscv/riscv-gnu-toolchain
     cd riscv-gnu-toolchain
     mkdir -p build && cd build
