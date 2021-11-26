@@ -41,7 +41,7 @@ Install RISC-V toolchains. You can do either of the following:
 
 ## Files list
 
-| Folder    | Description                                     |
+| Directory | Description                                     |
 | --------- | ----------------------------------------------- |
 | coverage  | Code coverage report                            |
 | doc       | Instruction set document                        |
@@ -274,12 +274,12 @@ One instruction memory and one data memory. The instruction memory is read-only 
 
 ## Synthesis
 
-Provide the Yosys synthesis script on the syn folder.
+Provide the Yosys synthesis script on the `syn` directory.
 
 ## Compliance tests
 
 Compliance test for ISS simulator and RTL. This is the compliance test form RISC-V Foundation Compliance Task Group.
-The github repository is at <https://github.com/riscv/riscv-compliance>. Running the following command will clone the repository into tests folder and do the compliance test.
+The github repository is at <https://github.com/riscv/riscv-compliance>. Running the following command will clone the repository into `tests` directory and do the compliance test.
 
     make tests              # run the compliance test for RTL
     make tests-sw           # run the compliance test for ISS simulator
@@ -305,7 +305,7 @@ This is an example to run the "queue" demo.
     # copy queue.elf
     cp Demo/examples/queue.elf ${path_of_srv32}/sw/queue/.
 
-    # update the example in sw folder
+    # update the example in sw directory
     cd ${path_of_srv32}/sw && make update
 
     # run the example for RTL and ISS simulator

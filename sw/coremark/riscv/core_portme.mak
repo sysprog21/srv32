@@ -65,7 +65,7 @@ EXE = .elf
 port_pre% port_post% : 
 
 # FLAG : OPATH
-# Path to the output folder. Default - current folder.
+# Path to the output directory. Default - current directory.
 OPATH = ./
 MKDIR = mkdir -p
 
