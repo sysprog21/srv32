@@ -23,7 +23,7 @@ Install RISC-V toolchains. You can do either of the following:
 
 1. Use pre-built GNU Toolchain via <A href="https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack/">xPack GNU RISC-V Embedded GCC</A>. Then, you can define an environment variable in advance:
     ```shell
-    export CROSS_COMPILER=riscv-none-embed-
+    export CROSS_COMPILE=riscv-none-embed-
     ```
 2. Build from source. Take Ubuntu Linux for example.
     ```shell

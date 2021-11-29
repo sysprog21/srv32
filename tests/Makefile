@@ -3,8 +3,8 @@ memsize    ?= 128
 test_v     ?= 1
 rv32c      ?= 0
 
-ifndef CROSS_COMPILER
-export CROSS_COMPILER = riscv-none-embed-
+ifndef CROSS_COMPILE
+export CROSS_COMPILE = riscv-none-embed-
 endif
 
 .PHONY: riscv-compliance
@@ -13,7 +13,7 @@ tests: riscv-compliance
 	export ROOT_SRV32=$(ROOT_SRV32); \
 	export TARGET_SIM="$(ROOT_SRV32)/sim/sim +trace"; \
 	export TARGET_SWSIM="$(ROOT_SRV32)/tools/rvsim --memsize $(memsize)"; \
-	export RISCV_PREFIX=$(CROSS_COMPILER); \
+	export RISCV_PREFIX=$(CROSS_COMPILE); \
 	export RISCV_TARGET=srv32; \
 	$(MAKE) rv32c=$(rv32c) -C riscv-compliance.v$(test_v)
 
@@ -21,7 +21,7 @@ tests-sw: riscv-compliance
 	export ROOT_SRV32=$(ROOT_SRV32); \
 	export TARGET_SIM="$(ROOT_SRV32)/tools/rvsim --memsize $(memsize) -l trace.log"; \
 	export TARGET_SWSIM="$(ROOT_SRV32)/tools/rvsim --memsize $(memsize)"; \
-	export RISCV_PREFIX=$(CROSS_COMPILER); \
+	export RISCV_PREFIX=$(CROSS_COMPILE); \
 	export RISCV_TARGET=srv32; \
 	$(MAKE) rv32c=$(rv32c) -C riscv-compliance.v$(test_v)
 
