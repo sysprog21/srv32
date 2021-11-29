@@ -92,7 +92,7 @@ Supports following parameter when running the simulation.
 * `+dump` : dump VCD (Icarus Verilog) / FST (Verilator) file
 * `+trace` : generate tracelog
 
-For example, following command will generate the VCD dump.
+For example, following command will generate the VCD/FST dump. You can browse file `wave.fst` via [GTKWave](http://gtkwave.sourceforge.net/).
 ```shell
 cd sim && ./sim +dump
 ```
