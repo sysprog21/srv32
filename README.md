@@ -25,9 +25,8 @@ Install RISC-V toolchains. You can do either of the following:
     ```shell
     export CROSS_COMPILER=riscv-none-embed-
     ```
-2. Build from source.
+2. Build from source. Take Ubuntu Linux for example.
     ```shell
-    # Ubuntu packages needed:
     sudo apt install autoconf automake autotools-dev curl gawk git \
                      build-essential bison flex texinfo gperf libtool patchutils bc git \
                      libmpc-dev libmpfr-dev libgmp-dev gawk zlib1g-dev libexpat1-dev
@@ -36,6 +35,17 @@ Install RISC-V toolchains. You can do either of the following:
     mkdir -p build && cd build
     ../configure --prefix=/opt/riscv --enable-multilib
     make -j$(nproc)
+    ```
+
+Install the dependent packages.
+
+1. For Ubuntu Linux
+    ```shell
+    sudo apt install build-essential ccache
+    ```
+2. For macOS
+    ```shell
+    brew install ccache verilator gawk
     ```
 
 ## Files list
