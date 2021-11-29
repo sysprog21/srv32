@@ -66,13 +66,6 @@ Install the dependent packages.
 
 Support Verilator (default) and Icarus Verilog.
 
-To run Icarus Verilog,
-```shell
-# Ubuntu package needed to run the RTL simulation
-sudo apt install iverilog
-make verilator=0
-```
-
 Only running make without parameters will get help.
 ```shell
 $ make
