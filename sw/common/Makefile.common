@@ -11,6 +11,17 @@ OBJDUMP := $(CROSS_COMPILER)objdump
 OBJCOPY := $(CROSS_COMPILER)objcopy
 READELF := $(CROSS_COMPILER)readelf
 
+RV32_CC = $(CROSS_COMPILER)gcc
+RV32_CC := $(shell which $(RV32_CC))
+ifndef RV32_CC
+$(error "no $(CROSS_COMPILER)gcc found.")
+endif
+
+RV32_CC2 = $(shell echo | $(CROSS_COMPILER)cpp -dM - | grep __riscv && echo 1)
+ifeq ("$(RV32_CC2)","")
+$(error "no valid GNU toolchain for RISC-V found.")
+endif
+
 ifeq ($(rv32c), 1)
 ARCH    := -march=rv32imac -mabi=ilp32
 else
