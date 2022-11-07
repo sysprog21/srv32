@@ -1,4 +1,3 @@
-verilator  ?= 1
 top        ?= 0
 rv32c      ?= 0
 debug      ?= 0
@@ -30,7 +29,6 @@ ifeq ($(rv32c),1)
     _rv32c := 1
 endif
 
-ifeq ($(verilator),1)
 BFLAGS      = -O3 -cc -Wall -Wno-STMTDLY -Wno-UNUSED \
               +define+MEMSIZE=$(memsize) \
               $(if $(_top), +define+SINGLE_RAM) \
@@ -38,9 +36,6 @@ BFLAGS      = -O3 -cc -Wall -Wno-STMTDLY -Wno-UNUSED \
               $(if $(_coverage), --coverage) \
               --trace-fst --Mdir sim_cc --build --exe sim_main.cpp getch.cpp
 TARGET_SIM  = verilator
-else
-BFLAGS      = $(if $(_top), -D SINGLE_RAM=1) $(if $(_rv32c), -DRV32C_ENABLED=1)
-endif
 
 FILELIST    = -f filelist.txt $(if $(_top), ../rtl/top_s.v, ../rtl/top.v)
 
@@ -48,9 +43,7 @@ all: $(TARGET)
 
 $(TARGET):
 	$(TARGET_SIM) $(BFLAGS) -o $(TARGET) $(FILELIST)
-	@if [ "$(verilator)" = "1" ]; then \
-		mv sim_cc/sim .; \
-	fi
+	mv sim_cc/sim .
 
 %.elf: $(TARGET) checkcode.awk
 	@if [ ! -f ../sw/$*/memory.bin ]; then \

@@ -27,10 +27,15 @@ endif
 export CROSS_COMPILE
 export EXTRA_CFLAGS
 
+# check Verilator version
+VERILATOR_VER = $(shell verilator --version | grep -E '^Verilator\s5')
+ifeq ($(VERILATOR_VER),)
+$(error Verilator 5.x is required to build simulator. Please check package installation)
+endif
+
 dirs        = $(dir $(wildcard sw/[^_]*/))
 SUBDIRS     = $(subst /,,$(subst sw/,,$(subst common,,$(dirs))))
 
-verilator ?= 1
 top       ?= 0
 coverage  ?= 0
 debug     ?= 0
@@ -46,10 +51,6 @@ ifeq ($(test_v), 1)
     memsize ?= 128
 else
     memsize ?= 1716
-endif
-
-ifeq ($(verilator), 1)
-    _verilator := 1
 endif
 
 ifeq ($(top), 1)
@@ -114,7 +115,7 @@ build:
 
 $(SUBDIRS):
 	@$(MAKE) rv32c=$(rv32c) -C sw $@
-	@$(MAKE) $(if $(_verilator), verilator=1) \
+	@$(MAKE) \
 			 $(if $(_coverage), coverate=1) \
 			 $(if $(_top), top=1) rv32c=$(rv32c) debug=$(debug) -C sim $@.elf
 	@$(MAKE) $(if $(_top), top=1) rv32c=$(rv32c) -C tools $@.elf

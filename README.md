@@ -65,27 +65,14 @@ Adding extra CFLAGS as follows.
 
 ## RTL Simulation
 
-Support Verilator (default) and Icarus Verilog.
+Support Verilator.
 
 To run Verilator,
 
     # Ubuntu package needed to run the RTL simulation
     sudo apt install verilator
     
-    # Modify the Makefile, and set verilator ?= 1
-    vim sim/Makefile
-    or
-    make verilator=1
-
-To run Icarus Verilog,
-
-    # Ubuntu package needed to run the RTL simulation
-    sudo apt install iverilog
-    
-    # Modify the Makefile, and set verilator ?= 0
-    vim sim/Makefile
-    or
-    make verilator=0
+    make
 
 Only running make without parameters will get help.
 
