@@ -3,10 +3,6 @@ memsize    ?= 128
 test_v     ?= 2
 rv32c      ?= 0
 
-ifndef CROSS_COMPILE
-export CROSS_COMPILE = riscv64-unknown-elf-
-endif
-
 ifneq (, $(findstring darwin, $(shell gcc -dumpmachine)))
 POST_PATCH ?= cd riscv-arch-test.v2 && git checkout . && patch -p 1 < ../macos.patch && cd ..
 else

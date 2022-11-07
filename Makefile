@@ -1,7 +1,31 @@
+# Supported GNU Toolchain for RISC-V
+TOOLCHAIN_LIST := riscv-none-elf-      \
+                  riscv32-unknown-elf- \
+                  riscv64-unknown-elf- \
+                  riscv-none-embed-
 
-ifndef CROSS_COMPILE
-export CROSS_COMPILE = riscv64-unknown-elf-
+define check-cross-tools
+$(shell which $(1)gcc >/dev/null &&
+        which $(1)cpp >/dev/null &&
+        echo | $(1)cpp -dM - | grep __riscv >/dev/null &&
+        echo "$(1) ")
+endef
+
+# TODO: support clang/llvm based cross compilers
+# TODO: support native RISC-V compilers
+CROSS_COMPILE ?= $(word 1,$(foreach prefix,$(TOOLCHAIN_LIST),$(call check-cross-tools, $(prefix))))
+ifeq ($(CROSS_COMPILE),)
+$(error GNU Toolchain for RISC-V is required to build packages. Please check package installation)
 endif
+
+# workaround for xPack GNU RISC-V GCC: force RISC-V GCC using the older ISA
+# spec version.
+ifeq ($(strip $(CROSS_COMPILE)),riscv-none-elf-)
+override EXTRA_CFLAGS := $(EXTRA_CFLAGS) -misa-spec=2.2 -march=rv32im
+endif
+
+export CROSS_COMPILE
+export EXTRA_CFLAGS
 
 dirs        = $(dir $(wildcard sw/[^_]*/))
 SUBDIRS     = $(subst /,,$(subst sw/,,$(subst common,,$(dirs))))

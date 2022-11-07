@@ -1,9 +1,5 @@
 rv32c   ?= 0
 
-ifndef CROSS_COMPILE
-export CROSS_COMPILE = riscv64-unknown-elf-
-endif
-
 CC      := $(CROSS_COMPILE)gcc
 CPP     := $(CROSS_COMPILE)g++
 AS      := $(CROSS_COMPILE)as
